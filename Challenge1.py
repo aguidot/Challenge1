@@ -1,3 +1,7 @@
+# Quick note before you continue to read my code, I basically just put everything asked in the Challenge into this document.
+# This was just the easiest option for me when originally making this python file.
+# Please let me know if I need to correct this in future challenge assignments.
+
 # coding: utf-8
 import csv
 from pathlib import Path
@@ -34,6 +38,7 @@ print("The total of all loans in the list equals $", loans_sum)
 loans_average = loans_sum / get_loans_list
 print("The average loan price is $", loans_average)
 
+# I just wanted to add this in for my sake. I wanted to see where each part of the challenge ended.
 print("The concludes Part 1.")
 print("")
 
@@ -85,14 +90,18 @@ discount_rate = 0.2
 print("The discount rate is ", discount_rate)
 
 present_value = future_value / (1 + discount_rate/12) **remaining_months
-print("The present value of the loan is $", present_value) #should I round?
-present_value_rounded = round(present_value, 2) #just to make the number look nicer, since loans cannot be paid in that many decimal places
+print("The present value of the loan is $", present_value) 
+#should I round?
+present_value_rounded = round(present_value, 2) 
+#just to make the number look nicer, since loans cannot be paid in that many decimal places
 print("The present value rounded will be $", present_value_rounded)
 
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
 # @TODO: Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
 #    If the present value of the loan is greater than or equal to the cost, then print a message that says the loan is worth at least the cost to buy it.
 #    Else, the present value of the loan is less than the loan cost, then print a message that says that the loan is too expensive and not worth the price.
+
+#i just use a and b from the examples I have seen before to get the comparsion equation going
 a = present_value
 loan_price = loan.get("loan_price")
 b = loan_price
@@ -104,6 +113,8 @@ elif a == b:
 else:
     print("The loan is too expensive and not worth the price.")
 
+
+# I just wanted to add this in for my sake. I wanted to see where each part of the challenge ended.
 print("The concludes Part 2.")
 print("")
 
@@ -129,6 +140,8 @@ new_loan = {
 # @TODO: Define a new function that will be used to calculate present value.
 #    This function should include parameters for `future_value`, `remaining_months`, and the `annual_discount_rate`
 #    The function should return the `present_value` for the loan.
+
+# using the get function below to call the values shown in the dictionary above
 new_future_value = new_loan.get("future_value")
 print("The future value for the new loan will be $", new_future_value)
 
@@ -147,6 +160,8 @@ print(f"The present value of the loan is : $ {new_present_value}") #i will round
 new_present_value_rounded = round(new_present_value, 2)
 print(f"The rounded present value of the loan is : $ {new_present_value_rounded}")
 
+
+# I just wanted to add this in for my sake. I wanted to see where each part of the challenge ended.
 print("The concludes Part 3.")
 print("")
 
@@ -198,10 +213,16 @@ inexpensive_loans = []
 # okay this one is the most challenging
 
 print("Total number of loans in the list: ", len(loans))
+
+#this was another code for my benefit to have to write less later down the line, you will see this directly below
 pricess = loans[0]["loan_price"], loans[1]["loan_price"], loans[2]["loan_price"], loans[3]["loan_price"]
 
+# this was another code for my benefit to have to write less later
+# i also wanted just to show what was defined as a inexpensive loan to potentially people interested
+# one could also assume you tell them that in person, but my code does that work too
 print("All the loans in the list are as follows: ", pricess)
 
+# originally I had done this before we learned more in class, so i know this might be a longer way to do the code, but i get to the same place in the end with this code
 if loans[0]["loan_price"] < 501:
     inexpensive_loans.append(loans[0]["loan_price"])
 else:
@@ -221,8 +242,11 @@ else:
 
 # @TODO: Print the `inexpensive_loans` list
 
+# finally printing the inexpensive_loan list
 print("The inexpensive loans list contains: ", inexpensive_loans)
 
+
+# I just wanted to add this in for my sake. I wanted to see where each part of the challenge ended.
 print("This concludes Part 4.")
 print(" ")
 
@@ -251,18 +275,21 @@ output_path = Path("inexpensive_loans.csv")
 # and each row of `loan.values()` from the `inexpensive_loans` list.
 # YOUR CODE HERE!
 
+
 import csv
+from pathlib import Path
 
-fields = header
-
-
-filename = "inexpensive_loans.csv"
-
-with open(filename, newline='') as csvfile:
-    rows = output_path
-    header = next(rows)
-for row in rows:
-
+csvpath = Path("inexpensive_loans.csv")
+with open(csvpath, 'w', newline='') as csvfile:
     csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(fields)
-    csvwriter.writerows(rows)
+
+    # header row first
+    csvwriter.writerow(header)
+
+    # now the data rows
+    for row in loans:
+        csvwriter.writerow(row.values())
+
+# I just wanted to add this in for my sake. I wanted to see where each part of the challenge ended.
+print("Lastly, we have outputed this to a CSV file. This concludes Part 5.")
+        # so i think this concludes the assignment
